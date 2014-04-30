@@ -23,6 +23,7 @@ module.exports = function (grunt) {
         var cert = conf('SRV_RSYNC_CERT');
         var latest = conf('SRV_RSYNC_LATEST');
         var versions = conf('SRV_VERSIONS');
+        var platform = conf('PM2_PLATFORM');
         var steps = [[
             util.format('echo "configuring up %s instance..."', name)
         ], [ // enable forwarding
@@ -61,7 +62,7 @@ module.exports = function (grunt) {
         ], [ // pm2
             'sudo apt-get install make g++ -y',
             'sudo npm install -g pm2',
-            'sudo pm2 startup'
+            util.format('sudo pm2 startup %s', platform)
         ]];
 
         function forwardPort(from, to) {

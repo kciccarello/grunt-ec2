@@ -43,7 +43,7 @@ Config.prototype.defaults = function () {
     df(_, 'RSYNC_EXCLUDE_FROM', '../../dat/defaults.rsyncignore');
 
     _.SRV_ROOT = util.format('/srv/apps/%s', _.PROJECT_ID);
-
+    _.PM2_PLATFORM = _.PM2_PLATFORM || "ubuntu";
     _.ENV = _.ENV || {};
     _.RSYNC_EXCLUDES = _.RSYNC_EXCLUDES || [];
     _.RSYNC_INCLUDE_FROM = _.RSYNC_INCLUDE_FROM ? absolute(_.RSYNC_INCLUDE_FROM) : false;
