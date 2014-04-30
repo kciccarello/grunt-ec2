@@ -45,6 +45,7 @@ Config.prototype.defaults = function () {
     _.SRV_ROOT = util.format('/srv/apps/%s', _.PROJECT_ID);
     _.PM2_PLATFORM = _.PM2_PLATFORM || "ubuntu";
     _.ENV = _.ENV || {};
+    _.RSYNC_LOCAL = _.RSYNC_LOCAL || '.';
     _.RSYNC_EXCLUDES = _.RSYNC_EXCLUDES || [];
     _.RSYNC_INCLUDE_FROM = _.RSYNC_INCLUDE_FROM ? absolute(_.RSYNC_INCLUDE_FROM) : false;
     _.RSYNC_INCLUDES = _.RSYNC_INCLUDES || [];
