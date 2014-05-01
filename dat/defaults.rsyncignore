@@ -2,4 +2,4 @@
 .git
 
 # will `npm install --production` on the server
-node_modules
+# node_modules
