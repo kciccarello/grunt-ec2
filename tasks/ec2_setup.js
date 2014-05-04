@@ -59,7 +59,9 @@ module.exports = function (grunt) {
             'sudo add-apt-repository ppa:chris-lea/node.js -y',
             'sudo apt-get update',
             'sudo apt-get install nodejs -y'
-        ], [ // pm2
+        ],  [ // git
+            'sudo apt-get install git -y'
+        ],  [ // pm2
             'sudo apt-get install make g++ -y',
             'sudo npm install -g pm2',
             util.format('sudo pm2 startup %s', platform)
