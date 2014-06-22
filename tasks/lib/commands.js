@@ -16,12 +16,13 @@ module.exports = {
         };
         var user = conf('ENV');
         var env = {};
+        var pm2StartOptions = (conf('PM2_FORK_MODE')) ? "-x": "-i 2";
 
         // user can override NODE_ENV if need be
         _.assign(env, defaults, user);
 
-        return util.format('%s || sudo %s pm2 start %s/%s -i 2 --name %s || echo "pm2 already started."',
-            running, parse.toPairs(env), conf('SRV_CURRENT'), conf('NODE_SCRIPT'), name
+        return util.format('%s || sudo %s pm2 start %s/%s %s --name %s || echo "pm2 already started."',
+            running, parse.toPairs(env), conf('SRV_CURRENT'), conf('NODE_SCRIPT'), pm2StartOptions, name
         );
     }
 };
