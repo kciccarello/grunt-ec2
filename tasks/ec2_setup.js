@@ -84,8 +84,8 @@ module.exports = function (grunt) {
         function installPandoc() {
           return [
             'sudo apt-get install haskell-platform -y',
-            'cabal install zip-archive',
             'cabal update',
+            'cabal install zip-archive',
             'cabal install pandoc'
           ];
         }
