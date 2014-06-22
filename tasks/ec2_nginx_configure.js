@@ -43,8 +43,6 @@ module.exports = function (grunt) {
             var project = conf('PROJECT_ID');
 
             return [
-                'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
-                'sudo apt-get update',
                 'sudo apt-get install nginx nginx-common nginx-full -y',
                 nginxTemplate('http', 'nginx'),
                 nginxTemplate('server', 'sites-enabled/' + project),

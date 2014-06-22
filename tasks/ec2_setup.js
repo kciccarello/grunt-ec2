@@ -57,6 +57,7 @@ module.exports = function (grunt) {
         }), [ // node.js
             'sudo apt-get install python-software-properties',
             'sudo add-apt-repository ppa:chris-lea/node.js -y',
+            'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
             'sudo apt-get update',
             'sudo apt-get install nodejs -y'
         ],  [ // git
