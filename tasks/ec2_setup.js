@@ -68,7 +68,9 @@ module.exports = function (grunt) {
           }
         }), [ // iptables-persistent
           'sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q iptables-persistent'
-        ]];
+        ], workflow.if_has('PANDOC_ENABLED', // install pandoc
+          installPandoc()
+        )];
 
         function forwardPort(from, to) {
             return [
@@ -78,6 +80,15 @@ module.exports = function (grunt) {
                 'sudo iptables-save'
             ];
         }
+
+        function installPandoc() {
+          return [
+            'sudo apt-get install haskell-platform',
+            'cabal update',
+            'cabal install pandoc'
+          ];
+        }
+
 
         workflow(steps, { name: name }, next);
 

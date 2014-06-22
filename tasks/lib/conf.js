@@ -57,6 +57,7 @@ Config.prototype.defaults = function () {
     _.SRV_VERSION = _.SRV_ROOT + '/v/%s';
     _.SRV_VERSIONS = _.SRV_ROOT + '/v';
     _.SSH_KEYS_RELATIVE = relative(_.SSH_KEYS_FOLDER);
+    _.PANDOC_ENABLED = _.PANDOC_ENABLED || false;
     _.VERBOSITY_NPM = verify(_.VERBOSITY_NPM, 'silent win error warn verbose silly'.split(' '), 'info');
     _.VERBOSITY_RSYNC = verify(_.VERBOSITY_RSYNC, 'v vv vvv'.split(' '), '');
 
