@@ -32,7 +32,7 @@ module.exports = function (grunt) {
             'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
             'sudo apt-get update',
             'sudo apt-get install nodejs -y',
-            'sudo apt-get install iptables-persistent'
+            'sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-no -q iptables-persistent'
         ],  [ // git
             'sudo apt-get install git -y'
         ],  [ // pm2
