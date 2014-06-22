@@ -31,8 +31,7 @@ module.exports = function (grunt) {
             'sudo add-apt-repository ppa:chris-lea/node.js -y',
             'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
             'sudo apt-get update',
-            'sudo apt-get install nodejs -y',
-            'sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-no -q iptables-persistent'
+            'sudo apt-get install nodejs -y'
         ],  [ // git
             'sudo apt-get install git -y'
         ],  [ // pm2
@@ -67,15 +66,16 @@ module.exports = function (grunt) {
             ],
             excludes: ['*']
           }
-        })];
+        }), [ // iptables-persistent
+          'sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q iptables-persistent'
+        ]];
 
         function forwardPort(from, to) {
             return [
                 util.format('sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport %s -j REDIRECT --to-port %s', from, to),
                 util.format('sudo iptables -A INPUT -p tcp -m tcp --sport %s -j ACCEPT', from),
                 util.format('sudo iptables -A OUTPUT -p tcp -m tcp --dport %s -j ACCEPT', from),
-                'sudo iptables-save',
-                'sudo iptables-save > /etc/iptables/rules.v4'
+                'sudo iptables-save'
             ];
         }
 
