@@ -43,15 +43,9 @@ module.exports = function (grunt) {
             var project = conf('PROJECT_ID');
 
             return [
-                workflow.if_has('SSL_ENABLED', [ // ssl enabled
-                    'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
-                    'sudo apt-get update',
-                    'sudo apt-get install nginx nginx-common nginx-full -y',
-                ]),
-                workflow.if_not('SSL_ENABLED', [ // ssl disabled
-                    'sudo apt-get update',
-                    'sudo apt-get install nginx -y',
-                ]),
+                'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
+                'sudo apt-get update',
+                'sudo apt-get install nginx nginx-common nginx-full -y',
                 nginxTemplate('http', 'nginx'),
                 nginxTemplate('server', 'sites-enabled/' + project),
                 'sudo nginx -s reload || sudo service nginx start || (cat /var/log/nginx/error.log && exit 1)'
