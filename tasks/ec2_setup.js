@@ -39,7 +39,7 @@ module.exports = function (grunt) {
             'sudo apt-get install make g++ -y',
             'sudo npm install -g pm2',
             util.format('sudo pm2 startup %s', platform)
-          // enable forwarding
+        ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
           'echo "net.ipv4.ip_forward = 1" >> /tmp/sysctl.conf',
           'sudo cp /tmp/sysctl.conf /etc/',
