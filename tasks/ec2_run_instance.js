@@ -28,7 +28,7 @@ module.exports = function (grunt) {
             KeyName: name,
             SecurityGroups: [conf('AWS_SECURITY_GROUP')]
         };
-        var cmd = 'ec2 run-instances --image-id %s --instance-type %s --count %s --key-name %s --security-groups %s';
+        var cmd = 'ec2 run-instances --image-id %s --instance-type %s --availability-zone us-east-1a --count %s --key-name %s --security-groups %s';
         aws.log(cmd, params.ImageId, params.InstanceType, params.MinCount, params.KeyName, params.SecurityGroups[0]);
         aws.ec2.runInstances(params, aws.capture(next));
 
