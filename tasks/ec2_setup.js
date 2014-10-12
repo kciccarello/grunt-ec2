@@ -36,7 +36,7 @@ module.exports = function (grunt) {
             'sudo apt-get install git -y'
         ],  [ // pm2
             'sudo apt-get install make g++ -y',
-            'sudo npm install -g pm2',
+            'sudo npm install -g pm2@0.9.6 --unsafe-perm',
             util.format('sudo pm2 startup %s', platform)
         ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
