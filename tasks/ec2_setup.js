@@ -24,6 +24,7 @@ module.exports = function (grunt) {
         var latest = conf('SRV_RSYNC_LATEST');
         var versions = conf('SRV_VERSIONS');
         var platform = conf('PM2_PLATFORM');
+        var pm2version = conf('PM2_VERSION');
         var steps = [[
             util.format('echo "configuring up %s instance..."', name)
         ], [ // node.js
@@ -36,7 +37,7 @@ module.exports = function (grunt) {
             'sudo apt-get install git -y'
         ],  [ // pm2
             'sudo apt-get install make g++ -y',
-            'sudo npm install -g pm2@0.9.6 --unsafe-perm',
+            util.format('sudo npm install -g pm2@%s --unsafe-perm', pm2version),
             util.format('sudo pm2 startup %s', platform)
         ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
