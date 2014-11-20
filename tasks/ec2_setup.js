@@ -34,6 +34,8 @@ module.exports = function (grunt) {
             'sudo apt-get update',
             'sudo apt-get install nodejs -y'
         ],  [ // git
+            'sudo add-apt-repository ppa:git-core/ppa',
+            'sudo apt-get update',
             'sudo apt-get install git -y'
         ],  [ // pm2
             'sudo apt-get install make g++ -y',
