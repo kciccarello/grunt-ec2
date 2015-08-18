@@ -35,8 +35,10 @@ module.exports = function (grunt) {
             'sudo apt-get install python-software-properties',
             'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
             'sudo apt-get update',
-            'curl https://raw.github.com/creationix/nvm/master/install.sh | sh',
-            'source $HOME/.nvm/nvm.sh',
+            'git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`',
+            'echo \'export NVM_DIR="/home/ubuntu/.nvm"\' >> ~/.bashrc',
+            'echo \'[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm\' >> ~/.bashrc',
+            'source ~/.bashrc',
             'nvm install stable',
             'nvm use stable'
         ],  [ // pm2
