@@ -59,6 +59,7 @@ Config.prototype.defaults = function () {
     _.PANDOC_ENABLED = _.PANDOC_ENABLED || false;
     _.WWW_REDIRECT = _.WWW_REDIRECT || false;
     _.PM2_VERSION = _.PM2_VERSION || '0.9.6';
+    _.NODE_VERSION = _.NODE_VERSION || 'v0.12.7';
     _.VERBOSITY_NPM = verify(_.VERBOSITY_NPM, 'silent win error warn verbose silly'.split(' '), 'info');
     _.VERBOSITY_RSYNC = verify(_.VERBOSITY_RSYNC, 'v vv vvv'.split(' '), '');
 

@@ -25,6 +25,7 @@ module.exports = function (grunt) {
         var versions = conf('SRV_VERSIONS');
         var platform = conf('PM2_PLATFORM');
         var pm2version = conf('PM2_VERSION');
+        var nodeVersion = conf('NODE_VERSION');
         var steps = [[
             util.format('echo "configuring up %s instance..."', name)
         ],  [ // git
@@ -35,16 +36,14 @@ module.exports = function (grunt) {
             'sudo apt-get install python-software-properties',
             'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
             'sudo apt-get update',
-            'git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`',
-            'echo \'export NVM_DIR="/home/ubuntu/.nvm"\' >> ~/.bashrc',
-            'echo \'[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm\' >> ~/.bashrc',
-            'source ~/.nvm/nvm.sh',
-            'nvm install stable',
-            'nvm use stable'
-        ],  [ // pm2
             'sudo apt-get install make g++ -y',
-            util.format('sudo npm install -g pm2@%s --unsafe-perm', pm2version),
-            util.format('sudo pm2 startup %s', platform)
+            'git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`',
+            util.format('echo \'nvm use %s\' >> ~/.bashrc', nodeVersion),
+            util.format('. ~/.nvm/nvm.sh && nvm install %s && npm install -g pm2@%s --unsafe-perm', nodeVersion, pm2version),
+            util.format('sudo su -c "env PATH=$PATH:/home/ubuntu/.nvm/versions/node/%s/bin pm2 startup %s -u %s"', nodeVersion, platform, platform),
+            'echo \'\' >> ~/.bashrc',
+            'echo \'export NVM_DIR="/home/ubuntu/.nvm"\' >> ~/.bashrc',
+            'echo \'[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm\' >> ~/.bashrc'
         ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
           'echo "net.ipv4.ip_forward = 1" >> /tmp/sysctl.conf',
