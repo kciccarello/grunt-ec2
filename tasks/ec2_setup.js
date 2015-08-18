@@ -27,16 +27,18 @@ module.exports = function (grunt) {
         var pm2version = conf('PM2_VERSION');
         var steps = [[
             util.format('echo "configuring up %s instance..."', name)
-        ], [ // node.js
-            'sudo apt-get install python-software-properties',
-            'sudo add-apt-repository ppa:chris-lea/node.js -y',
-            'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
-            'sudo apt-get update',
-            'sudo apt-get install nodejs -y'
         ],  [ // git
             'sudo add-apt-repository ppa:git-core/ppa -y',
             'sudo apt-get update',
             'sudo apt-get install git -y'
+        ], [ // node.js
+            'sudo apt-get install python-software-properties',
+            'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
+            'sudo apt-get update',
+            'curl https://raw.github.com/creationix/nvm/master/install.sh | sh',
+            'source $HOME/.nvm/nvm.sh',
+            'nvm install stable',
+            'nvm use stable'
         ],  [ // pm2
             'sudo apt-get install make g++ -y',
             util.format('sudo npm install -g pm2@%s --unsafe-perm', pm2version),
