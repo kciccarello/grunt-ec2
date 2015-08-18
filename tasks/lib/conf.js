@@ -44,7 +44,6 @@ Config.prototype.defaults = function () {
 
     _.SRV_ROOT = util.format('/srv/apps/%s', _.PROJECT_ID);
     _.PM2_PLATFORM = _.PM2_PLATFORM || "ubuntu";
-    _.PM2_FORK_MODE = _.PM2_FORK_MODE || false;
     _.ENV = _.ENV || {};
     _.RSYNC_LOCAL = _.RSYNC_LOCAL || '.';
     _.RSYNC_EXCLUDES = _.RSYNC_EXCLUDES || [];
@@ -63,7 +62,7 @@ Config.prototype.defaults = function () {
     _.VERBOSITY_NPM = verify(_.VERBOSITY_NPM, 'silent win error warn verbose silly'.split(' '), 'info');
     _.VERBOSITY_RSYNC = verify(_.VERBOSITY_RSYNC, 'v vv vvv'.split(' '), '');
 
-    _.PM2_INSTANCES_COUNT = _.PM2_INSTANCES_COUNT || 2;
+    _.PM2_INSTANCES_COUNT = _.PM2_INSTANCES_COUNT || 0;
 
     if (_.SSL_ENABLED) {
         _.SSL_CERTIFICATE_DIRECTORY = path.resolve(cwd, _.SSL_CERTIFICATE_DIRECTORY);
