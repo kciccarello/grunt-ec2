@@ -38,7 +38,7 @@ module.exports = function (grunt) {
             'git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`',
             'echo \'export NVM_DIR="/home/ubuntu/.nvm"\' >> ~/.bashrc',
             'echo \'[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm\' >> ~/.bashrc',
-            'source ~/.bashrc',
+            'source ~/.nvm/nvm.sh',
             'nvm install stable',
             'nvm use stable'
         ],  [ // pm2
