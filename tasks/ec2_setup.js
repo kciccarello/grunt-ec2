@@ -37,7 +37,7 @@ module.exports = function (grunt) {
             'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
             'sudo apt-get update',
             'sudo apt-get install make g++ -y',
-            'sudo git clone https://github.com/kciccarello/nvm.git /usr/local/nvm',
+            'sudo git clone https://github.com/xtuple/nvm.git /usr/local/nvm',
             'sudo ln -s /usr/local/nvm/nvm_bin.sh /usr/local/bin/nvm',
             util.format('sudo nvm install %s', nodeVersion),
             util.format('sudo npm install -g pm2@%s --unsafe-perm', pm2version),
