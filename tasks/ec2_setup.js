@@ -37,13 +37,12 @@ module.exports = function (grunt) {
             'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
             'sudo apt-get update',
             'sudo apt-get install make g++ -y',
-            'git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`',
-            util.format('echo \'nvm use %s\' >> ~/.bashrc', nodeVersion),
-            util.format('. ~/.nvm/nvm.sh && nvm install %s && npm install -g pm2@%s --unsafe-perm', nodeVersion, pm2version),
-            util.format('sudo su -c "env PATH=$PATH:/home/ubuntu/.nvm/versions/node/%s/bin pm2 startup %s -u %s"', nodeVersion, platform, platform),
-            'echo \'\' >> ~/.bashrc',
-            'echo \'export NVM_DIR="/home/ubuntu/.nvm"\' >> ~/.bashrc',
-            'echo \'[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm\' >> ~/.bashrc'
+            'sudo git clone https://github.com/kciccarello/nvm.git /usr/local/nvm',
+            'sudo ln -s /usr/local/nvm/nvm_bin.sh /usr/local/bin/nvm',
+            util.format('sudo nvm install %s', nodeVersion),
+            util.format('sudo npm install -g pm2@%s --unsafe-perm', pm2version),
+            util.format('sudo su -c "env PATH=$PATH:/usr/local/nvm/versions/node/%s/bin pm2 startup %s -u %s"', nodeVersion, platform, platform),
+            util.format('sudo nvm use %s', nodeVersion)
         ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
           'echo "net.ipv4.ip_forward = 1" >> /tmp/sysctl.conf',
