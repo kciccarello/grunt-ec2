@@ -42,9 +42,9 @@ module.exports = function (grunt) {
             util.format('sudo nvm install %s', nodeVersion),
             util.format('sudo npm install -g pm2@%s --unsafe-perm', pm2version),
             // Run pm2 startup so that the app re-starts on machine reboot
-            util.format('sudo su -c "env PATH=$PATH:/usr/local/nvm/versions/node/%s/bin pm2 startup %s -u ubuntu"', nodeVersion, platform),
-            // Ensure $PM2_HOME is correctly specifified
-            'sudo sed -i.bak \'s:PM2_HOME.*$:PM2_HOME="/home/ubuntu/.pm2":\' /etc/init.d/pm2-init.sh',
+            util.format('sudo su -c "env PATH=$PATH:/usr/local/nvm/versions/node/%s/bin pm2 startup %s -u root"', nodeVersion, platform),
+            // Ensure $USER and $PM2_HOME is correctly specifified
+            'sudo sed -i.bak -e \'s:USER=.*$:USER=ubuntu:\' -e \'s:PM2_HOME=.*$:PM2_HOME="/home/ubuntu/.pm2":\' /etc/init.d/pm2-init.sh',
             util.format('sudo nvm use %s', nodeVersion)
         ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
