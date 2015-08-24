@@ -32,7 +32,7 @@ module.exports = function (grunt) {
             'sudo add-apt-repository ppa:git-core/ppa -y',
             'sudo apt-get update',
             'sudo apt-get install git -y'
-        ], [ // node.js
+        ], [ // node.js (nvm) & pm2
             'sudo apt-get install python-software-properties',
             'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
             'sudo apt-get update',
@@ -41,7 +41,10 @@ module.exports = function (grunt) {
             'sudo ln -s /usr/local/nvm/nvm_bin.sh /usr/local/bin/nvm',
             util.format('sudo nvm install %s', nodeVersion),
             util.format('sudo npm install -g pm2@%s --unsafe-perm', pm2version),
-            util.format('sudo su -c "env PATH=$PATH:/usr/local/nvm/versions/node/%s/bin pm2 startup %s -u %s"', nodeVersion, platform, platform),
+            // Run pm2 startup so that the app re-starts on machine reboot
+            util.format('sudo su -c "env PATH=$PATH:/usr/local/nvm/versions/node/%s/bin pm2 startup %s -u ubuntu"', nodeVersion, platform),
+            // Ensure $PM2_HOME is correctly specifified
+            'sudo sed -i.bak \'s:PM2_HOME.*$:PM2_HOME="/home/ubuntu/.pm2":\' /etc/pm2-init.sh',
             util.format('sudo nvm use %s', nodeVersion)
         ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
