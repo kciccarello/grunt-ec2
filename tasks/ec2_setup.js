@@ -44,7 +44,7 @@ module.exports = function (grunt) {
             // Run pm2 startup so that the app re-starts on machine reboot
             util.format('sudo su -c "env PATH=$PATH:/usr/local/nvm/versions/node/%s/bin pm2 startup %s -u root"', nodeVersion, platform),
             // Ensure $USER and $PM2_HOME is correctly specifified
-            'sudo sed -i.bak -e \'s:USER=.*$:USER=ubuntu:\' -e \'s:PM2_HOME=.*$:PM2_HOME="/home/ubuntu/.pm2":\' /etc/init.d/pm2-init.sh',
+            'sudo sed -i.bak -e \'s:USER=.*$:USER=ubuntu:\' -e \'s:export PM2_HOME=.*$:export PM2_HOME="/home/ubuntu/.pm2":\' /etc/init.d/pm2-init.sh',
             util.format('sudo nvm use %s', nodeVersion)
         ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
