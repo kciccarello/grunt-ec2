@@ -32,20 +32,18 @@ module.exports = function (grunt) {
             'sudo add-apt-repository ppa:git-core/ppa -y',
             'sudo apt-get update',
             'sudo apt-get install git -y'
-        ], [ // node.js (nvm) & pm2
+        ], [ // node.js & pm2
             'sudo apt-get install python-software-properties',
             'sudo add-apt-repository ppa:chris-lea/nginx-devel -y',
             'sudo apt-get update',
             'sudo apt-get install make g++ -y',
-            'sudo git clone https://github.com/xtuple/nvm.git /usr/local/nvm',
-            'sudo ln -s /usr/local/nvm/nvm_bin.sh /usr/local/bin/nvm',
-            util.format('sudo nvm install %s', nodeVersion),
+            'sudo curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -',
+            'sudo apt-get install -y nodejs',
             util.format('sudo npm install -g pm2@%s --unsafe-perm', pm2version),
             // Run pm2 startup so that the app re-starts on machine reboot
-            util.format('sudo su -c "env PATH=$PATH:/usr/local/nvm/versions/node/%s/bin pm2 startup %s -u root"', nodeVersion, platform),
+            util.format('sudo pm2 startup %s -u root', platform),
             // Ensure $USER and $PM2_HOME is correctly specifified
             'sudo sed -i.bak -e \'s:USER=.*$:USER=ubuntu:\' -e \'s:export PM2_HOME=.*$:export PM2_HOME="/home/ubuntu/.pm2":\' /etc/init.d/pm2-init.sh',
-            util.format('sudo nvm use %s', nodeVersion)
         ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
           'echo "net.ipv4.ip_forward = 1" >> /tmp/sysctl.conf',
