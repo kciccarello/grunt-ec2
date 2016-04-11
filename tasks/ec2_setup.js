@@ -41,9 +41,7 @@ module.exports = function (grunt) {
             'sudo apt-get install -y nodejs',
             util.format('sudo npm install -g pm2@%s --unsafe-perm', pm2version),
             // Run pm2 startup so that the app re-starts on machine reboot
-            util.format('sudo pm2 startup %s -u root', platform),
-            // Ensure $USER and $PM2_HOME is correctly specifified
-            'sudo sed -i.bak -e \'s:USER=.*$:USER=ubuntu:\' -e \'s:export PM2_HOME=.*$:export PM2_HOME="/home/ubuntu/.pm2":\' /etc/init.d/pm2-init.sh',
+            util.format('sudo pm2 startup %s -u %s --hp /home/%s', platform, platform, platform),
         ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
           'echo "net.ipv4.ip_forward = 1" >> /tmp/sysctl.conf',
