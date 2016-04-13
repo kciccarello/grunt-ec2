@@ -44,6 +44,7 @@ module.exports = function (grunt) {
             util.format('sudo pm2 startup %s -u %s --hp /home/%s', platform, platform, platform),
             util.format('sudo chown -R %s /home/%s/.pm2', platform, platform),
             util.format('sudo chgrp -R %s /home/%s/.pm2', platform, platform),
+            util.format('sudo pm2 logrotate -u %s', platform),
         ],  [ // enable forwarding
           'cp /etc/sysctl.conf /tmp/',
           'echo "net.ipv4.ip_forward = 1" >> /tmp/sysctl.conf',

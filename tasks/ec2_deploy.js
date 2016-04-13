@@ -76,16 +76,13 @@ module.exports = function (grunt) {
             grunt.task.run('ec2-pagespeed:' + c.ip);
 
             grunt.log.writeln('You can access the instance via %s on %s', scheme.toUpperCase(), text);
-            grunt.log.write('Will tail nginx error logs and flush pm2 logs in 5s.');
+            grunt.log.write('Will tail nginx error logs and display pm2 list in 5s.');
 
             setTimeout(peek, 5000);
         }
 
         function peek () {
-            grunt.log.writeln('Flushing...');
-
             var commands = [
-                'pm2 flush',
                 'pm2 list'
             ];
 
