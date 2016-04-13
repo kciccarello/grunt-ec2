@@ -11,7 +11,7 @@ module.exports = {
         return util.format('%s && pm2 reload all || echo "pm2 not started."', running);
     },
     pm2_save: function() {
-      return util.format('%s && pm2 reload all || echo "pm2 not started."', running);
+      return util.format('%s && pm2 save || echo "pm2 not started."', running);
     },
     pm2_start: function (name) {
         var defaults = {
