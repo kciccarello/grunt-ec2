@@ -96,7 +96,6 @@ module.exports = function (grunt) {
           ];
         }
 
-
         workflow(steps, { name: name }, next);
 
         function next () {

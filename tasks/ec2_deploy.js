@@ -84,8 +84,8 @@ module.exports = function (grunt) {
             grunt.log.writeln('Flushing...');
 
             var commands = [
-                'sudo pm2 flush',
-                'sudo pm2 list'
+                'pm2 flush',
+                'pm2 list'
             ];
 
             if (conf('NGINX_ENABLED')) {
